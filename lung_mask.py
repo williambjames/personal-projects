@@ -9,9 +9,6 @@ Original file is located at
 
 import io
 import numpy as np
-
-pip install pydicom --quiet
-
 import pydicom
 from pydicom.uid import generate_uid
 
@@ -70,10 +67,6 @@ def process_file(input_file, output_file, thresh_val, set_hu_val, new_series_uid
   pixel_array = dcm.pixel_array
   if len(pixel_array.shape) == 3:
     pixel_array = pixel_array[:,:,0]
-  
-  data_type = pixel_array.dtype 
-  data_type_min_value = np.iinfo(data_type).min 
-  data_type_max_value = np.iinfo(data_type).max 
 
   pixel_array += gap 
   intercept -= slope*gap 
