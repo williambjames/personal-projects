@@ -131,3 +131,21 @@ def custom_code(data):
   api = create_ambra_sdk_api()
   process_study(api,data['study']['uuid'])
   return 'OK'
+
+if __name__ == '__main__':
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--url')
+    parser.add_argument('--username')
+    parser.add_argument('--password')
+    parser.add_argument('--study_uuid')
+#     parser.add_argument('--threshold', default=150)
+#     parser.add_argument('--set_hu_val', default=-10000)
+    args = parser.parse_args()
+    from ambra_sdk.api import Api
+    api = Api.with_creds(args.url, args.username, args.password)
+    from time import time
+    start = time()
+    process_study(api, args.study_uuid)
+    print('Total time: {:0.1f}'.format(time() - start))
+
